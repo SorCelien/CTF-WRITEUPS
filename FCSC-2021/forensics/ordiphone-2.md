@@ -301,7 +301,7 @@ Et voici un beau PNG
 
 #### Flag
 
-![](.gitbook/assets/flag.png)
+![](.forensics/src/flag.png)
 
 ## Sources & Aides
 
