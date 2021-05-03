@@ -51,11 +51,11 @@ De base j'ai voulu compiler le kernel sur une ubuntu 20.04 mais ca n'a jamais ma
 
 Voici comment je m'y suis pris.
 
-Téléchargement du kernel et du bon gcc. J'ai du prendre une autre branch du gcc car la master à été déprécié et le /bin/x86\_64-linux-android-4.9-gcc n'est plus dedans.
+Téléchargement du kernel et du bon gcc. J'ai du prendre une autre branch du gcc car la master à été déprécié et le /bin/x86\_64-linux-android-4.9-gcc n'est plus dedans. Pour gcc j'avais utilisé `-b pie-b4s4-release` mais le créateur à dis apres le chal que le bon était `-b android10-mainline-release`
 
 ```text
 # git clone https://android.googlesource.com/kernel/goldfish/ -b android-goldfish-4.4-dev
-# git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9 -b pie-b4s4-release
+# git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9 -b android10-mainline-release
 ```
 
 j'ai installé quelques paquets pour pouvoir make et le `libssl-dev` pour par avoir d'erreur lors de la compilation.
