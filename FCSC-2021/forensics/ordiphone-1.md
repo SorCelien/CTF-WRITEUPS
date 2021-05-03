@@ -14,7 +14,7 @@ SHA256\(`lime.dump`\) = `21575c12bcb8d67e6ca269bac6c3d360847b16922f2f44b0b360790
 
 ## Analyse & Résolution
 
-La variable qui nous est demandé de trouver est une variable 
+Pour ce challenge j'ai décidé comme le deux d'utiliser mon profil Linux Android Volatility, une fois créé la réponse est trouvable rapidement.
 
 #### Qu'est ce qu'un profil Volatility linux?
 
@@ -143,7 +143,7 @@ La commande ci-dessus nous permet de voir si notre profil est bien présent dans
 # vol.py --info
 ```
 
-En cherchant un peu sur internet je me suis rendu compte que `real_start_time` est une variable `task_struct` de chaque process.
+En cherchant un peu sur internet j'ai compris que `real_start_time` est une variable `task_struct`. Chaque process à une `task_struct` de la même forme.
 
 > Sous Linux, la structure noyau task\_struct représente un processus.  
 > Les champs pid et comm correspondent respectivement au PID du processus et au nom de l'exécutable. Le parent du processus est pointé par parent. Ces structures forment une liste doublement chaînée, chacune d'entre elles possédant une structure list\_head. Celle-ci contient deux pointeurs, next et prev, qui pointent vers les éléments suivant et précédent. À vrai dire, ils pointent en réalité vers le début des structures list\_head ; pour récupérer la task\_struct correspondante, il faut soustraire son offset à la valeur du pointeur.  
