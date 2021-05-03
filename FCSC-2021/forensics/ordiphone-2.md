@@ -301,7 +301,7 @@ Et voici un beau PNG
 
 #### Flag
 
-![](.forensics/src/flag.png)
+![](.CTF-WRITEUPS/FCSC-2021/forensics/src/flag.png)
 
 ## Sources & Aides
 
