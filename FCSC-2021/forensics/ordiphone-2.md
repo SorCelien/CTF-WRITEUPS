@@ -146,7 +146,7 @@ J'ai donc du me documenter sur Volatility et sur comment créer un profil linux 
 
 #### Qu'est ce qu'un profil Volatility linux?
 
-C'est un zip contenant deux choses, une fichier `module.dwraf` et un fichier `System.map`.
+C'est un zip contenant deux choses, une fichier `module.dwarf` et un fichier `System.map`.
 
 Fichier System.map :
 
@@ -154,7 +154,7 @@ Fichier System.map :
 > A symbol table is a look-up between symbol names and their addresses in memory. A symbol name may be the name of a variable or the name of a function. The System.map is required when the address of a symbol name, or the symbol name of an address, is needed. It is especially useful for debugging kernel panics and kernel oopses. The kernel does the address-to-name translation itself when CONFIG\_KALLSYMS is enabled so that tools like ksymoops are not required.  
 > [https://en.wikipedia.org/wiki/System.map](https://en.wikipedia.org/wiki/System.map)
 
-Fichier `module.dwraf` :
+Fichier `module.dwarf` :
 
 > DWARF is a widely used, standardized debugging data format. DWARF was originally designed along with Executable and Linkable Format \(ELF\), although it is independent of object file formats. The name is a medieval fantasy complement to "ELF" that had no official meaning, although the backronym "Debugging With Arbitrary Record Formats" has since been proposed.  
 > [https://en.wikipedia.org/wiki/DWARF](https://en.wikipedia.org/wiki/DWARF)
