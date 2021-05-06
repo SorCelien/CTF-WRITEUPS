@@ -28,7 +28,7 @@ il y a plusieurs possibilités pour extraire/monter une image ewf.
 convertir les ewf en img raw avec `ewfexport disque.e0? et ensuite le monter` av
 
 ```text
-$ ewfexport disque.e0?                                                                                                                              130 ⨯
+$ ewfexport disque.e0?
 $ sudo kpartx -av disque.raw
 ```
 
