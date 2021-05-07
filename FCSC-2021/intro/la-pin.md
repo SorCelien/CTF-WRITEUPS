@@ -78,7 +78,7 @@ pin = 6273 : b'FCSC{c1feab88e6c6932c57fbaf0c1ff6c32e51f07ae87197fcd08956be4408b2
 FCSC{c1feab88e6c6932c57fbaf0c1ff6c32e51f07ae87197fcd08956be4408b2c802}
 ```
 
-## Sources & Aides
+## Documentation
 
 [https://docs.python.org/fr/3.7/library/stdtypes.html](https://docs.python.org/fr/3.7/library/stdtypes.html)  
 [https://stackoverflow.com/questions/5649407/hexadecimal-string-to-byte-array-in-python](https://stackoverflow.com/questions/5649407/hexadecimal-string-to-byte-array-in-python)  
