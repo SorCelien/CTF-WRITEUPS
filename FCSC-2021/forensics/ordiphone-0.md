@@ -57,7 +57,7 @@ insmod /sdcard/lime.ko "path=/sdcard/lime.dump format=lime"
 ...
 ```
 
-Voila des informations intéressantes, dont des informations qui nous aideront pour [Ordiphone 2](ordiphone-0.md#ordiphone-2). Comme par exemple, la clé utilisée pour déchiffrer le fichier secret luks présent sur le carte SD. On y voit aussi la commande `insmod` utilisé pour le dump.
+Voila des informations intéressantes, dont des informations qui nous aideront pour [Ordiphone 2](https://github.com/SorCelien/CTF-WRITEUPS/blob/main/FCSC-2021/forensics/ordiphone-2.md). Comme par exemple, la clé utilisée pour déchiffrer le fichier secret luks présent sur le carte SD. On y voit aussi la commande `insmod` utilisé pour le dump.
 
 Ensuite pour avoir un peu plus de clarté j'ai fait un `strings | grep` et ces lignes là ont retenues mon attention.
 
