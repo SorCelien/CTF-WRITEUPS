@@ -31,11 +31,11 @@ Fichier `module.dwarf` :
 > DWARF is a widely used, standardized debugging data format. DWARF was originally designed along with Executable and Linkable Format \(ELF\), although it is independent of object file formats. The name is a medieval fantasy complement to "ELF" that had no official meaning, although the backronym "Debugging With Arbitrary Record Formats" has since been proposed.  
 > [https://en.wikipedia.org/wiki/DWARF](https://en.wikipedia.org/wiki/DWARF)
 
-Étant donné que ces deux fichiers sont dépendant du Kernel et que Volatility en a besoin pour "comprendre" comment est structuré le dump mémoire nous allons devoir compiler le kernel correspond nous même.
+Étant donné que ces deux fichiers sont dépendant du Kernel et que Volatility en a besoin pour "comprendre" comment est structuré le dump mémoire nous allons devoir compiler le kernel correspondant nous même.
 
 #### Compilation du Kernel Linux Android
 
-Voici quelque lien qui m'ont été très utile pour réaliser cette étape :  
+Voici quelques liens qui m'ont été très utiles pour réaliser cette étape :  
 [https://gabrio-tognozzi.medium.com/run-android-emulator-with-a-custom-kernel-547287ef708c](https://gabrio-tognozzi.medium.com/run-android-emulator-with-a-custom-kernel-547287ef708c)  
 [https://gabrio-tognozzi.medium.com/lime-on-android-avds-for-volatility-analysis-a3d2d89a9dd0](https://gabrio-tognozzi.medium.com/lime-on-android-avds-for-volatility-analysis-a3d2d89a9dd0)  
 [https://github.com/volatilityfoundation/volatility/wiki/Android\#cross-compile-the-kernel](https://github.com/volatilityfoundation/volatility/wiki/Android#cross-compile-the-kernel)
@@ -47,25 +47,25 @@ $ strings lime.dump|egrep 'Linux version'
 Linux version 4.4.124+ (forensics@fcsc2021) (gcc version 4.9.x 20150123 (prerelease) (GCC) ) #3 SMP PREEMPT Sun Mar 21 19:15:33 CET 2021
 ```
 
-De base j'ai voulu compiler le kernel sur une ubuntu 20.04 mais ca n'a jamais marché donc je me suis tourné vers une bonne vieille debian 10.9.0 en cli root.
+De base j'ai voulu compiler le kernel sur une ubuntu 20.04 mais cela n'a jamais marché donc je me suis tourné vers une bonne vieille debian 10.9.0 en cli root.
 
 Voici comment je m'y suis pris.
 
-Téléchargement du kernel et du bon gcc. J'ai du prendre une autre branch du gcc car la master à été déprécié et le /bin/x86\_64-linux-android-4.9-gcc n'est plus dedans. Pour gcc j'avais utilisé `-b pie-b4s4-release` mais le créateur à dis apres le chal que le bon était `-b android10-mainline-release`
+Téléchargement du kernel et du bon gcc. J'ai du prendre une autre branch du gcc car la master a été dépréciée et le /bin/x86\_64-linux-android-4.9-gcc n'est plus dedans. Pour gcc j'avais utilisé `-b pie-b4s4-release` mais le créateur a dit après le chall que la bonne était `-b android10-mainline-release`.
 
 ```text
 # git clone https://android.googlesource.com/kernel/goldfish/ -b android-goldfish-4.4-dev
 # git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9 -b android10-mainline-release
 ```
 
-j'ai installé quelques paquets pour pouvoir make et le `libssl-dev` pour par avoir d'erreur lors de la compilation.
+j'ai installé quelques paquets pour pouvoir make et le `libssl-dev` pour pas avoir d'erreur lors de la compilation.
 
 ```text
 # apt update
 # apt-get install build-essential dkms linux-headers-$(uname -r) libssl-dev
 ```
 
-Export des variables utilisé par le Makefile \(possible de ne pas le faire et de les passer en argument des makes comme vu sur les sites de doc\).
+Export des variables utilisées par le Makefile \(possible de ne pas le faire et de les passer en argument des makes comme vu sur les sites de doc\).
 
 ```text
 # export PATH=/root/x86_64-linux-android-4.9/bin:$PATH
@@ -217,7 +217,7 @@ Affichage de la `task_struct` de notre process `insmod`
 FCSC{63951047224}
 ```
 
-## Sources & Aides
+## Documentation
 
 [https://www.reddit.com/r/kernel/comments/bg6sj5/find\_start\_time\_of\_a\_process\_given\_pid/](https://www.reddit.com/r/kernel/comments/bg6sj5/find_start_time_of_a_process_given_pid/)  
 [https://people.cs.umass.edu/~liberato/courses/2019-spring-compsci590f/lecture-notes/19-intro-to-memory-forensics/](https://people.cs.umass.edu/~liberato/courses/2019-spring-compsci590f/lecture-notes/19-intro-to-memory-forensics/)  
