@@ -51,7 +51,7 @@ En suivant les instructions de l'énoncé voici comment devrait être découpé 
 | 2 | `f6fd213e` | `d8061e3f` |
 | `...` | `...` | `...` |
 
-ca nous donnerais donc :
+cela nous donnerait donc :
 
 ```text
 SHA256(20cebb3e96f09f3ef6fd213e...df342a3fc1ec213fd8061e3f...)
@@ -88,7 +88,7 @@ while i < len(string_all):
 string_end = string_i + string_g
 # print(sting_end)
 
-# convertion de la string en hex python et calcule du hash de cette dernière
+# conversion de la string en hex python et calcule du hash de cette dernière
 string_fromhex = bytes.fromhex(string_end)
 string_tosha256 = hashlib.sha256(string_fromhex)
 
@@ -105,7 +105,7 @@ Le hash du résultat `string_end` peut aussi être calculé avec [CyberChef](htt
 FCSC{843161934a8e53da8723047bed55e604e725160b868abb74612e243af94345d7}
 ```
 
-### Sources & Aides
+### Documentation
 
 [https://thispointer.com/python-open-a-file-using-open-with-statement-benefits-explained-with-examples/](https://thispointer.com/python-open-a-file-using-open-with-statement-benefits-explained-with-examples/)  
 [https://www.geeksforgeeks.org/python-program-to-convert-a-list-to-string/](https://www.geeksforgeeks.org/python-program-to-convert-a-list-to-string/)  
