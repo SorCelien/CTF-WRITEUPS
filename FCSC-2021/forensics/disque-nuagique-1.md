@@ -16,7 +16,7 @@ SHA256\(`data.zip`\) = `f25ad71798caa9a7c1a1bdb57cd4b189251b6fbcee116a0def914750
 
 ## Analyse & Résolution
 
-Dans le fichier zip nous avons de fichier `ewf` 
+Dans le fichier zip nous avons deux fichiers `ewf` 
 
 ```text
 $ sudo apt update
@@ -25,7 +25,7 @@ $ sudo apt install ewf-tools kpartx
 
 il y a plusieurs possibilités pour extraire/monter une image ewf.
 
-convertir les ewf en img raw avec `ewfexport disque.e0? et ensuite le monter` av
+convertir les ewf en img raw avec `ewfexport disque.e0?` et ensuite le monter avec `kpartx`
 
 ```text
 $ ewfexport disque.e0?
@@ -106,5 +106,5 @@ $ sudo xxd /dev/loop0 | grep -C 2 "LUKS" # ou sudo xxd disque.raw | grep -C 2 "L
 FCSC{1e900000}
 ```
 
-## Sources & Aides
+## Documentation
 
