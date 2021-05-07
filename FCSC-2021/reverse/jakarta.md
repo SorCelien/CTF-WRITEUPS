@@ -139,13 +139,13 @@ public class Check {
 * Tout d'abord, nous voyons dans la méthode `valid()` que la proposition de flag doit faire la même longueur que l'array d'entier `enc` \(70 de long\) pour être valide.
 * Juste en dessous le programme crée un array de int `A` de taille 70
 * Ensuite il boucle tant que `i < len` \(`len` étant la taille de `flag`, de `A` et de `enc` donc 70\).
-  * À chaque tour il met dans `ch` la valeur en int du charactère situé à l'endroit `((i * 37) + 1) % len` dans la string `flag` \(flag proposé par l'utilisateur et qui doit être vérifié\).
-  * Dans cette boucle il crée une autre boucle. C'est à dire qu'a chaque tour de la première boucle la deuxième boucle tournera 8 fois.
+  * À chaque tour il met dans `ch` la valeur en int du caractère situé à l'endroit `((i * 37) + 1) % len` dans la string `flag` \(flag proposé par l'utilisateur et qui doit être vérifié\).
+  * Dans cette boucle il crée une autre boucle. C'est à dire qu'à chaque tour de la première boucle la deuxième boucle tournera 8 fois.
     * Dans cette deuxième boucle il commence par faire `ch >> j` qui correspond à décaler `ch` sur la droite de `j` bit\(s\).
     * il fait ensuite un `&` \(AND, et logique\) entre le résultat de `ch >> j` et  `1`. Cette opération renvoie comme résultat soit `00000001` ou `00000000`.
     * Ensuite il décale le `00000001` ou `00000000` de `(((j * 5) + 3) % 8))` bit\(s\) sur la gauche.
-    * Enfin il fait un `^` \(XOR\) entre le résultat du dernier décalage et `A[i]` . À chaque premier tour `A[i]` sera vide donc le XOR se fera sur `00000000` \(`null`\) mais dès le deuxième tour  de la deuxième boucle `A[i]` aura une vraie valeur vu que l'opérations `A[i] ^ ...` aura été stocké dedans. `A[i]` changera donc huit fois avant de passer à `A[i+1]`.
-* Apres avoir remplis `A[]` de 70 valeurs le programme refait une autre boucle à l'extérieur qui va aussi boucler jusqu'à 70.
+    * Enfin il fait un `^` \(XOR\) entre le résultat du dernier décalage et `A[i]` . À chaque premier tour `A[i]` sera vide donc le XOR se fera sur `00000000` \(`null`\) mais dès le deuxième tour  de la deuxième boucle `A[i]` aura une vraie valeur vu que l'opération `A[i] ^ ...` aura été stockée dedans. `A[i]` changera donc huit fois avant de passer à `A[i+1]`.
+* Apres avoir rempli `A[]` de 70 valeurs le programme refait une autre boucle à l'extérieur qui va aussi boucler jusqu'à 70.
   * À l'intérieur de celle-ci il fait un `^` \(XOR\) entre `A[i2]` et `this.enc[i2]`. Ensuite il stocke dans `res` le résultat du `|` \(OR, ou logique\) entre `res` et le résultat du XOR.
   * J'ai testé le processus et la boucle finale et je me suis rendu compte d'un chose. Pour vous le le démontrer je vais tester l'opération avec `enc[0] = 11` donc `00001011` et `A[0]` au hasard une fois `00101001` puis `00001011`, dans les deux cas `res` vaudra 0 de base :
     * `res OR 00101001 XOR 00001011 = 00100010`
@@ -160,7 +160,7 @@ En gros, ca mélange tous les nombre présent entre 0 à 69.
 
 Pour que le programme valide le flag il faut donc que `A[i2] == enc[i2]`. Par exemple pour `enc[0]` qui vaut 11 nous devons retrouver quel `ch` renvoie un `A[0] = 00001011` donc 11.
 
-Le but premier va donc être de trouver quel `ch` \(valeur int d'un caractère ascii\) nous renvoie le `A[i]` correspondant à  `enc[i]` après être passé dans la moulinette de la deuxième boucle. Pour cela, nous allons tester la deuxième boucle \(celle qui fait les décalages\) avec tous les `ch` possible \(caractères ascii imprimables de 32 à 126\). En comparant `A[i]` avec `enc[i]` à chaque essai de `ch` nous pourrons donc ainsi définir quel caractère correspond au `enc[i]`. Enfin il suffit juste de remettre les valeurs de caractères dans le bon ordre étant donné que le `((i * 37) + 1) % len` à changé l'ordre.
+Le but premier va donc être de trouver quel `ch` \(valeur int d'un caractère ascii\) nous renvoie le `A[i]` correspondant à  `enc[i]` après être passé dans la moulinette de la deuxième boucle. Pour cela, nous allons tester la deuxième boucle \(celle qui fait les décalages\) avec tous les `ch` possibles \(caractères ascii imprimables de 32 à 126\). En comparant `A[i]` avec `enc[i]` à chaque essai de `ch` nous pourrons donc ainsi définir quel caractère correspond au `enc[i]`. Enfin, il suffit juste de remettre les valeurs de caractères dans le bon ordre étant donné que le `((i * 37) + 1) % len` a changé l'ordre.
 
 #### Résolution avec Java
 
@@ -211,7 +211,7 @@ public class Main {
 FCSC{6df723aa33b1aa8d604069a693e5990d411a7f7a7169b70e694b0bdf4d26aa9e}
 ```
 
-## Sources & Aides
+## Documentation
 
 [https://en.wikipedia.org/wiki/Android\_application\_package](https://en.wikipedia.org/wiki/Android_application_package)  
 [https://reverseengineering.stackexchange.com/questions/18170/what-are-the-tools-use-for-reverse-engineering-android-apk](https://reverseengineering.stackexchange.com/questions/18170/what-are-the-tools-use-for-reverse-engineering-android-apk)  
