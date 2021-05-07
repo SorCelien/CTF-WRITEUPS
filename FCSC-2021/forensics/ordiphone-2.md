@@ -24,7 +24,7 @@ xxd lime.dump | head
 00000000: 454d 694c 0100 0000 0010 0000 0000 0000  EMiL............
 ```
 
-En recherchant un peu sur internet grâce aux info ci-dessus on se rend vite compte que c'est un fichier dump mémoire réalisé avec lime. _\(écrit dans le nom du fichier mais au moins on est sur\)_.
+En recherchant un peu sur internet grâce aux infos ci-dessus on se rend vite compte que c'est un fichier dump mémoire réalisé avec lime. _\(écrit dans le nom du fichier mais au moins on est sur\)_.
 
 > **LiME ~ Linux Memory Extractor**  
 > A Loadable Kernel Module \(LKM\) which allows for volatile memory acquisition from Linux and Linux-based devices, such as Android. This makes LiME unique as it is the first tool that allows for full memory captures on Android devices. It also minimizes its interaction between user and kernel space processes during acquisition, which allows it to produce memory captures that are more forensically sound than those of other tools designed for Linux memory acquisition.   
@@ -128,9 +128,9 @@ echo $aleatoirebis | /data/data/com.termux/files/usr/bin/openssl aes-256-cbc -in
 rm flag
 ```
 
-Ce script nous montre comment le flag a été chiffré pour créer le `flag.enc`.Tout d'abord il génère une valeur hexadécimal pseudo aléatoire qu'il stocke dans la variable `aleatoire` et qu'il `echo` dans `/dev/kmsg`. Ensuite il concatène `aleatoire` avec les process id de `adbd`, `vold`, et `logd` et stock le résultat dans `aleatoirebis`. C'est ce `aleatoirebis` qui a été utilisé comme clé pour chiffrer le flag avec de l'aes-256-cbc.
+Ce script nous montre comment le flag a été chiffré pour créer le `flag.enc`.Tout d'abord il génère une valeur hexadécimal pseudo aléatoire qu'il stocke dans la variable `aleatoire` et qu'il `echo` dans `/dev/kmsg`. Ensuite il concatène `aleatoire` avec les process id de `adbd`, `vold`, et `logd` et stocke le résultat dans `aleatoirebis`. C'est ce `aleatoirebis` qui a été utilisé comme clé pour chiffrer le flag avec de l'aes-256-cbc.
 
-Vu que nous pouvons déterminer la longueur nous pouvons retrouver la chaine hexadécimal stocké dans aléatoire grâce à un simple `grep`.
+Vu que nous pouvons déterminer la longueur nous pouvons retrouver la chaine hexadécimal stockée dans aléatoire grâce à un simple `grep`.
 
 ```text
 $ strings lime.dump|egrep '^[a-f0-9]{60}$'
@@ -140,7 +140,7 @@ $ strings lime.dump|egrep '^[a-f0-9]{60}$'
 
 Il nous retourne 2 chaines hexadécimales. Pas besoin d'investiguer plus loin, nous testerons les deux.
 
-Pour les pids il est possible d'en retrouver certain avec des `grep` mais je n'ai pas réussi à tous les trouvés.
+Pour les pids il est possible d'en retrouver certain avec des `grep` mais je n'ai pas réussi à tous les trouver.
 
 J'ai donc du me documenter sur Volatility et sur comment créer un profil linux \(Android\) pour Volatility étant donné que je vais devoir l'utiliser pour explorer le dump mémoire.
 
@@ -148,7 +148,7 @@ J'ai donc du me documenter sur Volatility et sur comment créer un profil linux 
 
 C'est un zip contenant deux choses, une fichier `module.dwarf` et un fichier `System.map`.
 
-Fichier System.map :
+Fichier `System.map` :
 
 > In Linux, the System.map file is a symbol table used by the kernel.  
 > A symbol table is a look-up between symbol names and their addresses in memory. A symbol name may be the name of a variable or the name of a function. The System.map is required when the address of a symbol name, or the symbol name of an address, is needed. It is especially useful for debugging kernel panics and kernel oopses. The kernel does the address-to-name translation itself when CONFIG\_KALLSYMS is enabled so that tools like ksymoops are not required.  
@@ -159,11 +159,11 @@ Fichier `module.dwarf` :
 > DWARF is a widely used, standardized debugging data format. DWARF was originally designed along with Executable and Linkable Format \(ELF\), although it is independent of object file formats. The name is a medieval fantasy complement to "ELF" that had no official meaning, although the backronym "Debugging With Arbitrary Record Formats" has since been proposed.  
 > [https://en.wikipedia.org/wiki/DWARF](https://en.wikipedia.org/wiki/DWARF)
 
-Étant donné que ces deux fichiers sont dépendant du Kernel et que Volatility en a besoin pour "comprendre" comment est structuré le dump mémoire nous allons devoir compiler le kernel correspond nous même.
+Étant donné que ces deux fichiers sont dépendants du Kernel et que Volatility en a besoin pour "comprendre" comment est structuré le dump mémoire nous allons devoir compiler le kernel correspondant nous même.
 
 #### Compilation du Kernel Linux Android
 
-Voici quelque lien qui m'ont été très utile pour réaliser cette étape :  
+Voici quelques liens qui m'ont été très utiles pour réaliser cette étape :  
 [https://gabrio-tognozzi.medium.com/run-android-emulator-with-a-custom-kernel-547287ef708c](https://gabrio-tognozzi.medium.com/run-android-emulator-with-a-custom-kernel-547287ef708c)  
 [https://gabrio-tognozzi.medium.com/lime-on-android-avds-for-volatility-analysis-a3d2d89a9dd0](https://gabrio-tognozzi.medium.com/lime-on-android-avds-for-volatility-analysis-a3d2d89a9dd0)  
 [https://github.com/volatilityfoundation/volatility/wiki/Android\#cross-compile-the-kernel](https://github.com/volatilityfoundation/volatility/wiki/Android#cross-compile-the-kernel)
@@ -175,25 +175,25 @@ $ strings lime.dump|egrep 'Linux version'
 Linux version 4.4.124+ (forensics@fcsc2021) (gcc version 4.9.x 20150123 (prerelease) (GCC) ) #3 SMP PREEMPT Sun Mar 21 19:15:33 CET 2021
 ```
 
-De base j'ai voulu compiler le kernel sur une ubuntu 20.04 mais ca n'a jamais marché donc je me suis tourné vers une bonne vieille debian 10.9.0 en cli root.
+De base j'ai voulu compiler le kernel sur une ubuntu 20.04 mais cela n'a jamais marché donc je me suis tourné vers une bonne vieille debian 10.9.0 en cli root.
 
 Voici comment je m'y suis pris.
 
-Téléchargement du kernel et du bon gcc. J'ai du prendre une autre branch du gcc car la master à été déprécié et le /bin/x86\_64-linux-android-4.9-gcc n'est plus dedans. Pour gcc j'avais utilisé `-b pie-b4s4-release` mais le créateur à dis apres le chal que le bon était `-b android10-mainline-release`
+Téléchargement du kernel et du bon gcc. J'ai du prendre une autre branch du gcc car la master a été dépréciée et le /bin/x86\_64-linux-android-4.9-gcc n'est plus dedans. Pour gcc j'avais utilisé `-b pie-b4s4-release` mais le créateur a dit après le chall que la bonne était `-b android10-mainline-release`.
 
 ```text
 # git clone https://android.googlesource.com/kernel/goldfish/ -b android-goldfish-4.4-dev
 # git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9 -b android10-mainline-release
 ```
 
-j'ai installé quelques paquets pour pouvoir make et le `libssl-dev` pour par avoir d'erreur lors de la compilation.
+j'ai installé quelques paquets pour pouvoir make et le `libssl-dev` pour ne pas avoir d'erreur lors de la compilation.
 
 ```text
 # apt update
 # apt-get install build-essential dkms linux-headers-$(uname -r) libssl-dev
 ```
 
-Export des variables utilisé par le Makefile \(possible de ne pas le faire et de les passer en argument des makes comme vu sur les sites de doc\).
+Export des variables utilisées par le Makefile \(possible de ne pas le faire et de les passer en argument des makes comme vu sur les sites de doc\).
 
 ```text
 # export PATH=/root/x86_64-linux-android-4.9/bin:$PATH
@@ -201,7 +201,7 @@ Export des variables utilisé par le Makefile \(possible de ne pas le faire et d
 # export ARCH=x86_64
 ```
 
-Ensuite nous allons faire les deux make. Le premier pour créer le `.config` et le deuxième pour  build le kernel le tout dans le dossier `Goldfish`.
+Ensuite nous allons faire les deux make. Le premier pour créer le `.config` et le deuxième pour build le kernel le tout dans le dossier `Goldfish`.
 
 ```text
 make x86_64_ranchu_defconfig
@@ -228,7 +228,7 @@ source : [https://dmfrsecurity.com/2020/12/18/volatility-on-ubuntu-20-04/](https
 
 #### Création du profil Volatility
 
-Pour ce faire nous allons éditer le Makfile qui créera notre module.dwarf qui se situe dans `volatility/tools/linux`. Et enfin nous copierons dans un zip le module.dwarf et le System.map de notre Goldfish.
+Pour ce faire nous allons éditer le Makfile qui créera notre `module.dwarf` qui se situe dans `volatility/tools/linux`. Et enfin nous copierons dans un zip le `module.dwarf` et le `System.map` de notre Goldfish.
 
 Voici mon Makefile :
 
@@ -297,13 +297,13 @@ J'ai donc testé de déchiffrer et j'ai passé la passphrase une fois la command
 openssl enc -aes-256-cbc -d -in flag.enc
 ```
 
-Et voici un beau PNG
+Et voici un beau PNG.
 
 #### Flag
 
 ![](https://github.com/SorCelien/CTF-WRITEUPS/blob/main/FCSC-2021/forensics/src/flag.png)
 
-## Sources & Aides
+## Documentation
 
 [https://unix.stackexchange.com/questions/184519/how-to-grep-for-line-length-in-a-given-range](https://unix.stackexchange.com/questions/184519/how-to-grep-for-line-length-in-a-given-range) [https://stackoverflow.com/questions/39399595/using-grep-to-get-12-letter-alphabet-only-lines](https://stackoverflow.com/questions/39399595/using-grep-to-get-12-letter-alphabet-only-lines) [https://askubuntu.com/questions/590384/grep-searching-two-words-in-a-line](https://askubuntu.com/questions/590384/grep-searching-two-words-in-a-line)  
 [https://gabrio-tognozzi.medium.com/run-android-emulator-with-a-custom-kernel-547287ef708c](https://gabrio-tognozzi.medium.com/run-android-emulator-with-a-custom-kernel-547287ef708c)  
