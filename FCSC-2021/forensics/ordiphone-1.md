@@ -20,7 +20,7 @@ Pour ce challenge j'ai décidé comme le deux d'utiliser mon profil Linux Androi
 
 C'est un zip contenant deux choses, une fichier `module.dwarf` et un fichier `System.map`.
 
-Fichier System.map :
+Fichier `System.map` :
 
 > In Linux, the System.map file is a symbol table used by the kernel.  
 > A symbol table is a look-up between symbol names and their addresses in memory. A symbol name may be the name of a variable or the name of a function. The System.map is required when the address of a symbol name, or the symbol name of an address, is needed. It is especially useful for debugging kernel panics and kernel oopses. The kernel does the address-to-name translation itself when CONFIG\_KALLSYMS is enabled so that tools like ksymoops are not required.  
@@ -31,7 +31,7 @@ Fichier `module.dwarf` :
 > DWARF is a widely used, standardized debugging data format. DWARF was originally designed along with Executable and Linkable Format \(ELF\), although it is independent of object file formats. The name is a medieval fantasy complement to "ELF" that had no official meaning, although the backronym "Debugging With Arbitrary Record Formats" has since been proposed.  
 > [https://en.wikipedia.org/wiki/DWARF](https://en.wikipedia.org/wiki/DWARF)
 
-Étant donné que ces deux fichiers sont dépendant du Kernel et que Volatility en a besoin pour "comprendre" comment est structuré le dump mémoire nous allons devoir compiler le kernel correspondant nous même.
+Étant donné que ces deux fichiers sont dépendants du Kernel et que Volatility en a besoin pour "comprendre" comment est structuré le dump mémoire nous allons devoir compiler le kernel correspondant nous même.
 
 #### Compilation du Kernel Linux Android
 
@@ -58,7 +58,7 @@ Téléchargement du kernel et du bon gcc. J'ai du prendre une autre branch du gc
 # git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/x86/x86_64-linux-android-4.9 -b android10-mainline-release
 ```
 
-j'ai installé quelques paquets pour pouvoir make et le `libssl-dev` pour pas avoir d'erreur lors de la compilation.
+j'ai installé quelques paquets pour pouvoir make et le `libssl-dev` pour ne pas avoir d'erreur lors de la compilation.
 
 ```text
 # apt update
@@ -100,7 +100,7 @@ source : [https://dmfrsecurity.com/2020/12/18/volatility-on-ubuntu-20-04/](https
 
 #### Création du profil Volatility
 
-Pour ce faire nous allons éditer le Makfile qui créera notre module.dwarf qui se situe dans `volatility/tools/linux`. Et enfin nous copierons dans un zip le module.dwarf et le System.map de notre Goldfish.
+Pour ce faire nous allons éditer le Makfile qui créera notre `module.dwarf` qui se situe dans `volatility/tools/linux`. Et enfin nous copierons dans un zip le `module.dwarf` et le `System.map` de notre Goldfish.
 
 Voici mon Makefile :
 
