@@ -34,7 +34,7 @@ Il est aussi possible d'ouvrir les .e0? sur Autopsy pour parcourir les fichiers 
 
 Une fois monté il y a deux partitions, une /boot accessible et contenant des fichiers et une partition de type luks donc chiffrée. On peut voir que c'est du luks2 avec `cryptsetup luksDump partition`.
 
-Dans le boot à première vue il n'y a rien de bizarre a part des fichiers supprimés irrécupérables.
+Dans le boot à première vue il n'y a rien de bizarre à part des fichiers supprimés irrécupérables.
 
 #### je me suis penché sur le format ewf
 
@@ -68,7 +68,7 @@ Digest hash information
  MD5:   66a962d1edfee0fd53af52cb05cbfaf1
 ```
 
-La description et le examiner name m'ont bayte. J'ai chercher dans le hex des deux fichier ewf pour essayer de trouver un flag avec des grep et des strings dans tous les sens mais  j'ai rien trouvé.
+La description et le examiner name m'ont bait. J'ai cherché dans le hex des deux fichiers ewf pour essayer de trouver un flag avec des grep et des strings dans tous les sens mais je n'ai rien trouvé.
 
 #### Du coup j'ai essayé la suite de commande de SleuthKit
 
@@ -91,7 +91,7 @@ Units are in 512-byte sectors
 007:  -------   0020969472   0020971519   0000002048   Unallocated
 ```
 
-puis un fls \(lists allocated and unallocated file names within a file system.\) sur la seul partition qui marchait \(partition boot\).
+puis un fls \(lists allocated and unallocated file names within a file system.\) sur la seule partition qui marchait \(partition boot\).
 
 ```text
 $ fls disque.e01 -o 2048              
@@ -106,7 +106,7 @@ r/r * 15(realloc): initrd.img-4.19.0-14-amd64.new
 V/V 124929: $OrphanFiles
 ```
 
-j'ai voulu extract le 17 mais ca ne me sortait rien donc j'ai essayé d'extract le 15 initrd.img-4.19.0-14-amd64
+j'ai voulu extract le 17 mais ça ne me sortait rien donc j'ai essayé d'extract le 15 initrd.img-4.19.0-14-amd64
 
 ```text
 $ icat disque.e01 -o 2048 15 > oui.zip
@@ -152,7 +152,7 @@ FCSC{0fb01eb22d4f812dcbdfcb}
 
 #### Comprend comment cela se fait
 
-je voulais savoir d'où venait le flag donc j'ai dézippé une deuxième fois le fichier pour avoir accès directement à l'arborescence.Il était en faite dans :
+je voulais savoir d'où venait le flag donc j'ai dézippé une deuxième fois le fichier pour avoir accès directement à l'arborescence.Il était en fait dans :
 
 ```text
 root-LfekH8/.ssh:
@@ -169,16 +169,16 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCugzXip0c9+5DUxpTsJV1s9kLjiF4+inMOzziGnc4u
 FCSC{0fb01eb22d4f812dcbdfcb}
 ```
 
-j'ai voulu comprends d'où ca venait et en faite j'ai remarqué qu'on aurait pu trouvé juste en montant le disque et en allant dans la partition boot de 511 MB
+j'ai voulu comprendre d'où cela venait. J'ai remarqué qu'on aurait pu trouver le flag juste en montant le disque et en allant dans la partition boot de 511 MB
 
 ```text
 $ sudo file initrd.img-4.19.0-14-amd64 
 initrd.img-4.19.0-14-amd64: gzip compressed data, last modified: Sat Mar 13 17:12:07 2021, from Unix, original size modulo 2^32 101766656
 ```
 
-le initrd était la devant nos yeux. Lorsque qu'on greppait on ne trouvait rien parce que c'est un zip et donc que ce n'est pas le texte brute à l'intérieur
+le initrd était la devant nos yeux. Lorsque qu'on greppait on ne trouvait rien parce que c'est un zip et donc que ce n'est pas le texte brute à l'intérieur.
 
-si on cp le initrd et qu'on s'accord les permissions dessus puis qu'on le renomme avec .zip a la fin on a le même fichier que ce qu'on a eu avec le icat, un fichier gzip.
+Si on cp le initrd et qu'on s'accord les permissions dessus puis qu'on le renomme avec .zip a la fin on a le même fichier que ce qu'on a eu avec le icat, un fichier gzip.
 
 après l'avoir dézippé avec engrampa on a encore un fichier zip mais on peut déjà grep dessus et voir le flag mais voici son format :
 
@@ -188,11 +188,11 @@ en rajoutant .zip et en dézippant celui si on retrouve l'architecture comme plu
 
 #### Pourquoi ce fichier `authorized_keys`
 
-Ce fichier est surement la car Dropbear à surement été installé sur la machine pour pouvoir déverrouiller un disque Luks à distance en ssh comme dans ce lien.  
+Ce fichier est surement là car Dropbear à surement été installé sur la machine pour pouvoir déverrouiller un disque Luks à distance en ssh comme dans ce lien.  
 [https://www.cyberciti.biz/security/how-to-unlock-luks-using-dropbear-ssh-keys-remotely-in-linux/](https://www.cyberciti.biz/security/how-to-unlock-luks-using-dropbear-ssh-keys-remotely-in-linux/)  
 [https://www.ssh.com/academy/ssh/authorized-keys-file](https://www.ssh.com/academy/ssh/authorized-keys-file)
 
-## Sources & Aides
+## Documentation
 
 [https://www.binarytides.com/linux-command-check-disk-partitions/](https://www.binarytides.com/linux-command-check-disk-partitions/)  
 [https://www.jaiminton.com/Defcon/DFIR-2019/\#01-hello-my-name-is---1-point](https://www.jaiminton.com/Defcon/DFIR-2019/#01-hello-my-name-is---1-point)  
