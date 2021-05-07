@@ -19,7 +19,7 @@ xxd lime.dump | head
 00000000: 454d 694c 0100 0000 0010 0000 0000 0000  EMiL............
 ```
 
-En recherchant un peu sur internet grâce aux info ci-dessus on se rend vite compte que c'est un fichier dump mémoire réalisé avec lime. _\(écrit dans le nom du fichier mais au moins on est sur\)_.
+En recherchant un peu sur internet grâce aux info ci-dessus on se rend vite compte que c'est un fichier dump mémoire réalisé avec lime. _\(écrit dans le nom du fichier mais au moins on est sûr\)_.
 
 > **LiME ~ Linux Memory Extractor**  
 > A Loadable Kernel Module \(LKM\) which allows for volatile memory acquisition from Linux and Linux-based devices, such as Android. This makes LiME unique as it is the first tool that allows for full memory captures on Android devices. It also minimizes its interaction between user and kernel space processes during acquisition, which allows it to produce memory captures that are more forensically sound than those of other tools designed for Linux memory acquisition.   
@@ -57,9 +57,9 @@ insmod /sdcard/lime.ko "path=/sdcard/lime.dump format=lime"
 ...
 ```
 
-Voila des informations intéressantes, dont des informations qui nous aiderons pour [Ordiphone 2](ordiphone-0.md#ordiphone-2). Comme par exemple la clé utilisée pour déchiffrer le fichier secret luks présent sur le carte SD. On y vois aussi la commande `insmod` utilisé pour le dump.
+Voila des informations intéressantes, dont des informations qui nous aideront pour [Ordiphone 2](ordiphone-0.md#ordiphone-2). Comme par exemple, la clé utilisée pour déchiffrer le fichier secret luks présent sur le carte SD. On y voit aussi la commande `insmod` utilisé pour le dump.
 
-Ensuite pour avoir un peu plus de clarté j'ai fait un `strings | grep` et ces lignes la ont retenu mon attention.
+Ensuite pour avoir un peu plus de clarté j'ai fait un `strings | grep` et ces lignes là ont retenues mon attention.
 
 ```text
 $ strings lime.dump|grep -a "insmod"
@@ -102,7 +102,7 @@ FCSC{sha256(2021-03-23 19:13)}
 FCSC{b7dc08558ee16d1acbf54db67263c1d92e9a9d9603e6a1345550c825527adc06}
 ```
 
-### Sources & Aides
+### Documentation
 
 [https://github.com/504ensicsLabs/LiME](https://github.com/504ensicsLabs/LiME)  
 [https://linux.die.net/man/8/insmod](https://linux.die.net/man/8/insmod)  
