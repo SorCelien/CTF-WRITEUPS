@@ -131,11 +131,7 @@ Enfin nous allons zipper le module.dwarf et le System.map et mettre le zip au bo
 
 et voila.
 
-
-
 #### Exploration du dump
-
-
 
 La commande ci-dessus nous permet de voir si notre profil est bien présent dans la section profil et elle nous permet aussi de voir toute les commandes possibles avec un profil Linux. Un exemple des principales commandes linux de Volatility se trouve sur leur [Github](https://github.com/volatilityfoundation/volatility/wiki/Linux-Command-Reference).
 
