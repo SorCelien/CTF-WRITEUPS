@@ -91,9 +91,8 @@ source : [https://dmfrsecurity.com/2020/12/18/volatility-on-ubuntu-20-04/](https
 # apt install -y python2 python-dev dwarfdump build-essential yara zip git
 # wget https://bootstrap.pypa.io/get-pip.py
 # python2 get-pip.py
-# get-pip.py
 # pip2 install pycrypto yara-python distorm3==3.4.4 # https://github.com/volatilityfoundation/volatility/issues/719
-# clone https://github.com/volatilityfoundation/volatility.git 
+# git clone https://github.com/volatilityfoundation/volatility.git 
 # cd volatility
 # python2 setup.py install
 ```
