@@ -267,7 +267,7 @@ La commande ci-dessus nous permet de voir si notre profil est bien présent dans
 ```
 
 ```text
-# vol.py -f lime.dump --profile=LinuxGoldfishx64 linux-pstree
+# vol.py -f lime.dump --profile=LinuxGoldfishx64 linux_pstree
 Name                 Pid             Uid            
 init                 1                              
 .ueventd             1169                           
