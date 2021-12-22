@@ -249,6 +249,10 @@ clean:
 	rm -f module.dwarf
 ```
 
+```text
+make
+```
+
 Enfin nous allons zipper le module.dwarf et le System.map et mettre le zip au bon endroit sur le système.
 
 ```text
